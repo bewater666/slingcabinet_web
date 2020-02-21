@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orient.slingcabinet_web.dao.ToolDao">
+    <select id="findAll" resultType="com.orient.slingcabinet_web.model.Tool">
+        SELECT * FROM tool
+    </select>
+
+    <select id="findByChestID" resultType="com.orient.slingcabinet_web.model.Tool" parameterType="string">
+        SELECT * FROM tool WHERE chestID = #{chestID}
+    </select>
+
+    <select id="findByToolName" resultType="com.orient.slingcabinet_web.model.Tool" parameterType="string">
+        SELECT * FROM tool WHERE toolName = #{toolName}
+    </select>
+
+    <select id="findByToolID" resultType="com.orient.slingcabinet_web.model.Tool" parameterType="string">
+        SELECT * FROM tool WHERE toolID = #{toolID}
+    </select>
+
+    <select id="countByToolNameAndChestID" resultType="java.lang.Integer" parameterType="string">
+        SELECT COUNT(*) FROM tool where toolName = #{toolName} and chestID = #{chestID}
+    </select>
+</mapper>

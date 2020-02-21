@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orient.slingcabinet_web.dao.PermissionMapper">
+    <resultMap id="permissionMap" type="com.orient.slingcabinet_web.model.Permission">
+        <id column="permID" property="permID" jdbcType="INTEGER"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="perm_code" property="perm_code" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="findPermissionByRole" resultType="com.orient.slingcabinet_web.model.Permission" parameterType="com.orient.slingcabinet_web.model.Role">
+        SELECT * FROM permission p LEFT JOIN role_permission rp
+        ON rp.permID = p.permID
+        LEFT JOIN role r
+        ON r.roleID = rp.roleID
+        WHERE r.roleName = #{roleName}
+
+    </select>
+
+
+</mapper>

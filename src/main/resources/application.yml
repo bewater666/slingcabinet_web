@@ -1,0 +1,63 @@
+
+spring:
+#配置数据库连接池 提高数据访问效率
+  datasource:
+    name: db
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/slingcabinet?useUnicode=true&characterEncoding=utf-8&userSSL=false&serverTimezone=GMT%2B8
+    username: root
+    #zhoudun
+    password: superff
+#        9iwDwcTAycyHpciH
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    minIdle: 5
+    maxActive: 100
+    initialSize: 10
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 50
+    removeAbandoned: true
+    filters: stat # ,wall,log4j # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    useGlobalDataSourceStat: true # 合并多个DruidDataSource的监控数据
+    druidLoginName: wjf # 登录druid的账号
+    druidPassword: wjf # 登录druid的密码
+    cachePrepStmts: true # 开启二级缓存
+
+
+  thymeleaf:
+    cache: false
+
+#    全局设置时间格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+
+
+
+
+mybatis:
+   mapperLocations: classpath:/mapper/*.xml
+#   别名
+   typeAliasesPackage: com.orient.slingcabinet_web.model
+#   包扫描
+   mapperScanPackage: com.orient.slingcabinet_web.model
+   configuration:
+     map-underscore-to-camel-case: true
+
+
+logging:
+  level:
+    com.orient.slingcabinet_web: debug #com.orient.firestation包下所有class以debug级别输出 控制台打印sql语句（debug级别才可以）
+
+server:
+  port: 8085
+
+

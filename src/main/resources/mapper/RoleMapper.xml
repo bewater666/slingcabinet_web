@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orient.slingcabinet_web.dao.RoleMapper">
+    <resultMap id="RoleMap" type="com.orient.slingcabinet_web.model.Role">
+        <id column="roleID" property="roleID" jdbcType="INTEGER"/>
+        <result column="roleName" property="roleName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="conn_map">
+        u.userID,u.account,u.userName,u.password,r.roleID,r.roleName
+    </sql>
+
+
+    <select id="findRolesByUser" resultType="com.orient.slingcabinet_web.model.Role" parameterType="com.orient.slingcabinet_web.model.User">
+        SELECT * FROM role r LEFT JOIN user_role ur
+        ON ur.roleID = r.roleID
+        LEFT JOIN user u
+        ON u.userID = ur.userID
+        WHERE u.account = #{account}
+    </select>
+
+
+</mapper>
